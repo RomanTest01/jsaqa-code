@@ -13,6 +13,8 @@ test("Good test", async ({ page }) => {
   await page.getByPlaceholder("Пароль").click();
   await page.getByPlaceholder("Пароль").fill(password);
   await page.getByTestId("login-submit-btn").click();
+  
+  await page.waitForTimeout(15000);
 
   const h2Text = await page.innerText("h2");
   await expect(h2Text).toBe("Моё обучение");
