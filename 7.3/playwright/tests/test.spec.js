@@ -1,4 +1,4 @@
-const { test, expect } = require("@playwright/test");
+const { test, expect, chromium } = require("@playwright/test");
 const {
   username,
   password, 
@@ -6,18 +6,26 @@ const {
   unkwnownPassword,
 } = require("./../user");
 
-test("Good test", async ({ page }) => {
+test("Good test", async ({  }) => {
+  const browser = await chromium.launch({ headless: false });
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
   await page.goto("https://netology.ru/?modal=sign_in");
+
   await page.getByPlaceholder("Email").click();
   await page.getByPlaceholder("Email").fill(username);
   await page.getByPlaceholder("Пароль").click();
   await page.getByPlaceholder("Пароль").fill(password);
   await page.getByTestId("login-submit-btn").click();
-  
-  await page.waitForTimeout(15000);
 
-  const h2Text = await page.innerText("h2");
-  await expect(h2Text).toBe("Моё обучение");
+  //await page.waitForLoadState('load');
+  await page.waitForTimeout(30000);
+  //await page.waitForLoadState('networkidle',{timeout:50000});
+
+ await expect(page.locator('h2')).toHaveText("Моё обучение");
+
+  //await browser.close();
 });
 
 

@@ -37,14 +37,14 @@ describe("Github page tests", () => {
   }, 15000);
 });
 
-describe("HomeWork - 3 new tests for task №2", () => {
+describe("Search title", () => {
   test("Header of Actions", async () => {
     await page.goto("https://github.com/features/actions");
     const title = await page.title();
     expect(title).toContain("Features • GitHub Actions");
   });
 
-  test("Compare plans in the pricing", async () => {
+  test("Search Learn more in the pricing", async () => {
     await page.goto("https://github.com/pricing");
     const actual = await page.$eval("div", (link) => link.textContent);
     expect(actual).toContain("Learn more ");
