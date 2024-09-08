@@ -1,3 +1,5 @@
+const { timeout } = require("puppeteer");
+
 module.exports = {
     launch: {
         headless: false,
