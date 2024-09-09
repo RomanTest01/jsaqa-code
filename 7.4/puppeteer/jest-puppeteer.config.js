@@ -4,8 +4,8 @@ module.exports = {
     launch: {
         headless: false,
         defaultViewport: null,
-        devtools:true,
-        slowMo: 1000,
+        devtools:false,
+        slowMo: 50,
         args: ['--start-maximized'] //— используем максимальный размер окна браузера
       },
     

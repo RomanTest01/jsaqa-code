@@ -1,3 +1,5 @@
+const { timeout } = require("puppeteer");
+
 let page;
 
 beforeEach(async () => {
@@ -16,12 +18,14 @@ describe("Github page tests", () => {
   test("The h1 header content'", async () => {
     const firstLink = await page.$("header div div a");
     await firstLink.click();
-    await page.waitForSelector("h1");
+    //await page.waitForSelector("h1");
+    await page.waitForSelector(".h1-mktg.col-md-10.mx-auto.mb-3",{timeout:5000});
     const title2 = await page.title();
     expect(title2).toEqual(
       "GitHub for teams · Build like the best teams on the planet · GitHub"
     );
-  }, 5000);
+  },5000);
+  
 
   test("The first link attribute", async () => {
     const actual = await page.$eval("a", (link) => link.getAttribute("href"));
